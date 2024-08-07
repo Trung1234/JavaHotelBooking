@@ -1,0 +1,126 @@
+Hotel Booking Database ERD
+
+Entities:
+
+Rooms
+id (primary key)
+room_number
+room_type (enum: single, double, suite)
+capacity
+rate
+description
+Guests
+id (primary key)
+first_name
+last_name
+email (unique)
+phone
+address
+Bookings
+id (primary key)
+room_id (foreign key referencing Rooms)
+guest_id (foreign key referencing Guests)
+checkin
+checkout
+status (enum: pending, checkedin, checkedout, cancelled)
+Payments
+id (primary key)
+booking_id (foreign key referencing Bookings)
+payment_method (enum: cash, card, online)
+payment_date
+amount
+Amenities
+id (primary key)
+name
+description
+Room Amenities (bridge table)
+room_id (foreign key referencing Rooms)
+amenity_id (foreign key referencing Amenities)
+Relationships:
+
+A room can have multiple bookings (one-to-many).
+A guest can make multiple bookings (one-to-many).
+A booking is associated with one room and one guest (many-to-one).
+A payment is associated with one booking (many-to-one).
+A room can have multiple amenities (many-to-many).
+An amenity can be associated with multiple rooms (many-to-many).
+Here's a visual representation of the ERD:
+
+
+Verify
+
+Open In Editor
+Edit
+Copy code
++---------------+
+|  Rooms       |
++---------------+
+|  id (PK)    |
+|  room_number |
+|  room_type   |
+|  capacity    |
+|  rate        |
+|  description |
++---------------+
+       |
+       |
+       v
++---------------+
+|  Bookings    |
++---------------+
+|  id (PK)    |
+|  room_id (FK) |
+|  guest_id (FK) |
+|  checkin     |
+|  checkout    |
+|  status      |
++---------------+
+       |
+       |
+       v
++---------------+
+|  Guests      |
++---------------+
+|  id (PK)    |
+|  first_name  |
+|  last_name   |
+|  email (U)  |
+|  phone       |
+|  address     |
++---------------+
+       |
+       |
+       v
++---------------+
+|  Payments   |
++---------------+
+|  id (PK)    |
+|  booking_id (FK) |
+|  payment_method |
+|  payment_date  |
+|  amount       |
++---------------+
+       |
+       |
+       v
++---------------+
+|  Amenities  |
++---------------+
+|  id (PK)    |
+|  name        |
+|  description |
++---------------+
+       |
+       |
+       v
++---------------+
+|  Room Amenities |
++---------------+
+|  room_id (FK) |
+|  amenity_id (FK) |
++---------------+
+Note: The above diagram uses a simplified notation, where:
+
+PK represents the primary key.
+FK represents the foreign key.
+U represents a unique constraint.
