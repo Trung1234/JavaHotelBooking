@@ -91,6 +91,8 @@ This project is a "Hotel Booking System" built using Spring Boot. It includes ba
 
 ## Additional Requirements
 ### Install lombok
+we can run the jar via java -jar command, and an installer UI will open. This tries to automatically detect all available Eclipse installations, but it’s also possible to specify the location manually.
+Once we’ve selected the installations, we press the Install/Update button:
 ![install-lombok-1](https://github.com/user-attachments/assets/02c276ab-6b39-4c63-86cd-99866c127801)
 
 
