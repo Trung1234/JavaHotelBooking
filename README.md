@@ -90,6 +90,9 @@ This project is a "Hotel Booking System" built using Spring Boot. It includes ba
 6. **Deployment:** Deploy the application to a server (using Docker and CI/CD if possible).
 
 ## Additional Requirements
+### Install lombok
+![install-lombok-1](https://github.com/user-attachments/assets/02c276ab-6b39-4c63-86cd-99866c127801)
+
 
 1. **Exception Handling:** Ensure the system handles errors well and provides useful information to users.
 2. **Logging and Monitoring:** Record actions and errors occurring in the system for easy tracking and troubleshooting.
