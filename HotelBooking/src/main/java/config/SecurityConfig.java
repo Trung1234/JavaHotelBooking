@@ -20,16 +20,21 @@ public class SecurityConfig extends WebSecurityConfiguration {
         http
             .csrf().disable()  // Disable CSRF for simplicity (not recommended for production)
             .authorizeRequests()
-                .requestMatchers("/login").permitAll()  // Allow access to login API
+                .requestMatchers("/signin").permitAll()  // Allow access to login API
                 .anyRequest().authenticated()  // Secure all other endpoints
             .and()
             .formLogin()
-                .loginProcessingUrl("/login")  // Specify the login URL
+                .loginProcessingUrl("/signin")  // Specify the login URL
                 .defaultSuccessUrl("/home", true)  // Redirect to home after successful login
             .and()
             .logout()
                 .logoutUrl("/logout")  // Specify the logout URL
-                .logoutSuccessUrl("/login");  // Redirect to login after logout
+                .logoutSuccessUrl("/signin")
+             .and().authorizeRequests()
+             .requestMatchers("/signup").permitAll() // Permit public endpoints
+             .anyRequest().authenticated()          // Other requests require authentication
+             .and()
+         .httpBasic();  // Redirect to login after logout
     }
 
     @Bean
