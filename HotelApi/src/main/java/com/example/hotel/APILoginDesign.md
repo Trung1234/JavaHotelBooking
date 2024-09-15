@@ -62,7 +62,7 @@ The Login API is a RESTful API that allows users to authenticate and obtain an a
 
  + 401: Unauthorized (invalid credentials or token)
  + 403: Forbidden (access denied)
- + E500: Internal Server Error (unexpected error)
+ + 500: Internal Server Error (unexpected error)
    
 
 
