@@ -1,5 +1,6 @@
 package com.example.hotel.controllers;
 
+import com.example.hotel.common.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,14 +29,15 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<User> authenticateUser(@RequestBody LoginDto loginDto) {
+    public ResponseEntity<String> authenticateUser(@RequestBody LoginDto loginDto) {
         User user = userService.authenticateUser(loginDto);
         if (user != null) {
             boolean isMatchPass = userService.matchPassword(loginDto.getPassword(),user.getPassword());
             if (!isMatchPass) {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
             }else {
-                return ResponseEntity.ok(user);
+                String token = JwtUtil.generateToken(user.getUsername());
+                return ResponseEntity.ok(token);
             }
         } else {
             return ResponseEntity.status(404).body(null);
