@@ -2,9 +2,11 @@ package com.example.hotel.controllers;
 
 import com.example.hotel.common.JwtUtil;
 import com.example.hotel.exeption.EmailAlreadyExistsException;
+import com.example.hotel.common.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,13 +24,16 @@ public class UserController {
 
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@RequestBody SignUpDto signUpDto){
+        if (StringUtils.isNullorBlank(signUpDto.getEmail()) || StringUtils.isNullorBlank(signUpDto.getPassword())) {
+            throw new IllegalArgumentException("Please input email and password ");
+        }
         // Check if email already exists in the database
         if (userService.existsByEmail(signUpDto)) {
             throw new EmailAlreadyExistsException("Email is already in use: " + signUpDto.getEmail());
         }
         userService.createUser(signUpDto);
 
-        return new ResponseEntity<>("User registered successfully", HttpStatus.OK);
+        return new ResponseEntity<>("User registered successfully", HttpStatus.CREATED);
 
     }
 
@@ -44,7 +49,7 @@ public class UserController {
                 return ResponseEntity.ok(token);
             }
         } else {
-            return ResponseEntity.status(404).body(null);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
     }
 }
