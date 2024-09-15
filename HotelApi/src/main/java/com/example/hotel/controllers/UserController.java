@@ -1,6 +1,7 @@
 package com.example.hotel.controllers;
 
 import com.example.hotel.common.JwtUtil;
+import com.example.hotel.exeption.EmailAlreadyExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +22,10 @@ public class UserController {
 
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@RequestBody SignUpDto signUpDto){
-
+        // Check if email already exists in the database
+        if (userService.existsByEmail(signUpDto)) {
+            throw new EmailAlreadyExistsException("Email is already in use: " + signUpDto.getEmail());
+        }
         userService.createUser(signUpDto);
 
         return new ResponseEntity<>("User registered successfully", HttpStatus.OK);
@@ -36,7 +40,7 @@ public class UserController {
             if (!isMatchPass) {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
             }else {
-                String token = JwtUtil.generateToken(user.getUsername());
+                String token = JwtUtil.generateToken(user.getUsername(),"ROLE_ADMIN");
                 return ResponseEntity.ok(token);
             }
         } else {

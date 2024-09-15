@@ -9,6 +9,8 @@ import com.example.hotel.dto.SignUpDto;
 import com.example.hotel.entity.User;
 import com.example.hotel.mapper.UserMapper;
 
+import java.util.Objects;
+
 @Service
 public class UserService {
 
@@ -25,6 +27,11 @@ public class UserService {
         user.setEmail(signUpDto.getEmail());
         user.setPassword(PasswordEncryption.hashPassword(signUpDto.getPassword()));
         userMapper.insertUser(user);
+    }
+
+    public boolean existsByEmail(SignUpDto signUpDto) {
+        String email = signUpDto.getEmail();
+        return Objects.nonNull(userMapper.selectUserByEmail(email));
     }
 
     public User authenticateUser(LoginDto loginDto) {
