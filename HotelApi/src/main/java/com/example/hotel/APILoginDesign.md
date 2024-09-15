@@ -54,7 +54,7 @@ The Login API is a RESTful API that allows users to authenticate and obtain an a
 
 **The access_token is verified on each request to protected resources.**
 
-### `Error Handling
+### `Error Handling`
 
 **The API returns HTTP error codes and error messages in JSON format.**
 
