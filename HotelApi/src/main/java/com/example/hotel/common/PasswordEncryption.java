@@ -14,7 +14,6 @@ public class PasswordEncryption {
     }
     
     public static boolean checkpw(String plainPassword,String hashedPassword) {
-        boolean isMatch = BCrypt.checkpw(plainPassword, hashedPassword);
-        return isMatch;
+        return BCrypt.checkpw(plainPassword, hashedPassword);
     }
 }
