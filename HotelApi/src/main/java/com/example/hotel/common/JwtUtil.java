@@ -20,6 +20,27 @@ public class JwtUtil {
                 .compact();
     }
 
+    /**
+     * Method to verify and parse a JWT token
+     * @param token
+     * @return
+     */
+    public static Claims verifyToken(String token) {
+        try {
+            // Parse and verify the token
+            Claims claims = Jwts.parser()
+                    .setSigningKey(SECRET_KEY)
+                    .parseClaimsJws(token)
+                    .getBody();
+
+            return claims; // If successful, return the claims
+        } catch (Exception e) {
+            // Handle token parsing or validation failure (e.g., expired token, invalid signature)
+            System.out.println("Invalid token: " + e.getMessage());
+            return null;
+        }
+    }
+
     // Get user and role from claims
     public static String getUsername(Claims claims) {
         return claims.getSubject();  // This is the username or user ID

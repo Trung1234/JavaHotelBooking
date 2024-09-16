@@ -1,7 +1,7 @@
 package com.example.hotel.exeption;
 
-public class EmailAlreadyExistsException extends RuntimeException {
-    public EmailAlreadyExistsException(String message) {
+public class DataAlreadyExistsException extends RuntimeException {
+    public DataAlreadyExistsException(String message) {
         super(message);
     }
 }

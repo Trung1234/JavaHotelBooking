@@ -1,12 +1,11 @@
 package com.example.hotel.controllers;
 
 import com.example.hotel.common.JwtUtil;
-import com.example.hotel.exeption.EmailAlreadyExistsException;
+import com.example.hotel.exeption.DataAlreadyExistsException;
 import com.example.hotel.common.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,7 +28,7 @@ public class UserController {
         }
         // Check if email already exists in the database
         if (userService.existsByEmail(signUpDto)) {
-            throw new EmailAlreadyExistsException("Email is already in use: " + signUpDto.getEmail());
+            throw new DataAlreadyExistsException("Email is already in use: " + signUpDto.getEmail());
         }
         userService.createUser(signUpDto);
 

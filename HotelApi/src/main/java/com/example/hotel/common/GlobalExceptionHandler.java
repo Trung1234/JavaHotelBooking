@@ -1,10 +1,9 @@
 package com.example.hotel.common;
 
-import com.example.hotel.exeption.EmailAlreadyExistsException;
+import com.example.hotel.exeption.DataAlreadyExistsException;
 import com.example.hotel.response.ErrorResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
@@ -13,13 +12,13 @@ import org.springframework.web.context.request.WebRequest;
 public class GlobalExceptionHandler {
 
     /**
-     * Handle the EmailAlreadyExistsException
+     * Handle the DataAlreadyExistsException
       * @param ex
      * @param request
      * @return
      */
-    @ExceptionHandler(EmailAlreadyExistsException.class)
-    public ResponseEntity<?> handleEmailAlreadyExistsException(EmailAlreadyExistsException ex, WebRequest request) {
+    @ExceptionHandler(DataAlreadyExistsException.class)
+    public ResponseEntity<?> handleEmailAlreadyExistsException(DataAlreadyExistsException ex, WebRequest request) {
         // Create a response body with error details
         ErrorResponse errorResponse = new ErrorResponse();
         errorResponse.setStatusCode(HttpStatus.CONFLICT.value());
