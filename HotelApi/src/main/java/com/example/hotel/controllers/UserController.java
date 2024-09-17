@@ -3,6 +3,7 @@ package com.example.hotel.controllers;
 import com.example.hotel.common.JwtUtil;
 import com.example.hotel.exeption.DataAlreadyExistsException;
 import com.example.hotel.common.StringUtils;
+import com.example.hotel.exeption.InvalidInputException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,6 +31,15 @@ public class UserController {
         if (userService.existsByEmail(signUpDto)) {
             throw new DataAlreadyExistsException("Email is already in use: " + signUpDto.getEmail());
         }
+
+        // Validate input
+        userService.validateUserInput(signUpDto);
+
+        // Validate password strength
+        if (!userService.isPasswordStrong(signUpDto.getPassword())) {
+            throw new InvalidInputException("Password does not meet strength requirements.");
+        }
+
         userService.createUser(signUpDto);
 
         return new ResponseEntity<>("User registered successfully", HttpStatus.CREATED);
