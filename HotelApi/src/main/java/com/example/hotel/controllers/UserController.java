@@ -7,6 +7,7 @@ import com.example.hotel.exeption.InvalidInputException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,6 +17,7 @@ import com.example.hotel.dto.SignUpDto;
 import com.example.hotel.entity.User;
 import com.example.hotel.services.UserService;
 
+@Transactional
 @RestController
 public class UserController {
     @Autowired

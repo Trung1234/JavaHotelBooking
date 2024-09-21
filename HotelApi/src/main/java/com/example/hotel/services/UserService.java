@@ -22,13 +22,14 @@ public class UserService {
 
 
     public void createUser(SignUpDto signUpDto) {
-
         // create user object
         User user = new User();
         user.setName(signUpDto.getName());
         user.setUsername(signUpDto.getUsername());
         user.setEmail(signUpDto.getEmail());
         user.setPassword(PasswordEncryption.hashPassword(signUpDto.getPassword()));
+        user.setInsertDate(signUpDto.getInsertDate());
+        user.setUpdateDate(signUpDto.getUpdateDate());
         userMapper.insertUser(user);
     }
 

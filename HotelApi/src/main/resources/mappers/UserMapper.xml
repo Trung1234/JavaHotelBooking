@@ -3,8 +3,8 @@
 
 <mapper namespace="com.example.hotel.mapper.UserMapper">
     <insert id="insertUser" parameterType="com.example.hotel.entity.User" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO users (username,name, password, email)
-        VALUES (#{username},#{name},#{password}, #{email})
+        INSERT INTO users (username,name, password, email,insert_date,update_date)
+        VALUES (#{username},#{name},#{password}, #{email}, #{insertDate}, #{updateDate})
     </insert>
     <!-- Select user by email -->
     <select id="selectUserByEmail" resultType="com.example.hotel.entity.User">
