@@ -1,19 +1,44 @@
 package com.example.hotel.controllers;
 
+import com.example.hotel.common.JwtUtil;
+import com.example.hotel.dto.HotelDto;
+import com.example.hotel.dto.LoginDto;
+import com.example.hotel.entity.Room;
+import com.example.hotel.entity.User;
+import com.example.hotel.services.HotelService;
 import com.example.hotel.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDate;
+import java.util.List;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
 @Transactional
 @RestController
 @RequestMapping("api")
 public class RoomController {
+    @Autowired
+    private HotelService hotelService;
+
     @GetMapping("/test")
     public String test() {
         return "Hello ";
+    }
+
+    @PostMapping("/findRooms")
+    public ResponseEntity<List<Room>> findAvailableRooms(@RequestBody HotelDto hotelDto) throws ExecutionException, InterruptedException {
+        LocalDate checkInDate = LocalDate.parse(hotelDto.getCheckInDate());
+        LocalDate checkOutDate = LocalDate.parse(hotelDto.getCheckOutDate());
+
+
+        CompletableFuture<List<Room>> roomList = hotelService.findAvailableRooms(checkInDate,checkOutDate,hotelDto.getGuests());
+
+        return ResponseEntity.ok(roomList.get());
     }
 }
 

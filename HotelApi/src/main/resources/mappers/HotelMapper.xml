@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.hotel.mapper.HotelMapper">
+
+    <!-- Select user by email -->
+    <select id="findAvailableRooms" resultType="com.example.hotel.entity.Room">
+        select rooms1.* from hotelbookingdb.rooms as rooms1
+        inner join
+        (select room_id,count(guest_id) from hotelbookingdb.bookings
+        where checkin =  #{checkInDate} and checkout=  #{checkOutDate}
+        group by room_id
+        having count(guest_id) =  #{guests} ) as rooms2
+        on rooms1.id = rooms2.room_id
+    </select>
+</mapper>
