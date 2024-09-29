@@ -7,6 +7,7 @@ import com.example.hotel.entity.Room;
 import com.example.hotel.entity.User;
 import com.example.hotel.services.HotelService;
 import com.example.hotel.services.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,7 +32,7 @@ public class RoomController {
     }
 
     @PostMapping("/findRooms")
-    public ResponseEntity<List<Room>> findAvailableRooms(@RequestBody HotelDto hotelDto) throws ExecutionException, InterruptedException {
+    public ResponseEntity<List<Room>> findAvailableRooms(@org.jetbrains.annotations.NotNull @RequestBody @Valid HotelDto hotelDto) throws ExecutionException, InterruptedException {
         LocalDate checkInDate = LocalDate.parse(hotelDto.getCheckInDate());
         LocalDate checkOutDate = LocalDate.parse(hotelDto.getCheckOutDate());
 
