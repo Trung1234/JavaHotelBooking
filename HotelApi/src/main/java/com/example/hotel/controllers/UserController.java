@@ -15,6 +15,8 @@ import com.example.hotel.dto.SignUpDto;
 import com.example.hotel.entity.User;
 import com.example.hotel.services.UserService;
 
+import java.util.Optional;
+
 @Transactional
 @RestController
 public class UserController {
@@ -49,13 +51,13 @@ public class UserController {
 //    @CrossOrigin(origins = "http://localhost:3000")  // Allow specific origin
     @PostMapping("/login")
     public ResponseEntity<String> authenticateUser(@RequestBody LoginDto loginDto) {
-        User user = userService.authenticateUser(loginDto);
-        if (user != null) {
-            boolean isMatchPass = userService.matchPassword(loginDto.getPassword(),user.getPassword());
+        Optional<User> user = userService.authenticateUser(loginDto);
+        if (user.isPresent()) {
+            boolean isMatchPass = userService.matchPassword(loginDto.getPassword(),user.get().getPassword());
             if (!isMatchPass) {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
             }else {
-                String token = JwtUtil.generateToken(user.getUsername(),"ROLE_ADMIN");
+                String token = JwtUtil.generateToken(user.get().getUsername(),"ROLE_ADMIN");
                 return ResponseEntity.ok(token);
             }
         } else {

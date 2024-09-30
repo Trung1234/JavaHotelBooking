@@ -11,6 +11,7 @@ import com.example.hotel.entity.User;
 import com.example.hotel.mapper.UserMapper;
 
 import java.util.Objects;
+import java.util.Optional;
 import java.util.regex.Pattern;
 
 @Service
@@ -39,7 +40,7 @@ public class UserService {
         return Objects.nonNull(userMapper.selectUserByEmail(email));
     }
 
-    public User authenticateUser(LoginDto loginDto) {
+    public Optional<User> authenticateUser(LoginDto loginDto) {
     	String email = loginDto.getEmail();
         return userMapper.selectUserByEmail(email);
     }
