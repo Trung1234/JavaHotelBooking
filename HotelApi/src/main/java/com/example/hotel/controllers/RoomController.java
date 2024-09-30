@@ -32,12 +32,10 @@ public class RoomController {
     }
 
     @PostMapping("/findRooms")
-    public ResponseEntity<List<Room>> findAvailableRooms(@org.jetbrains.annotations.NotNull @RequestBody @Valid HotelDto hotelDto) throws ExecutionException, InterruptedException {
-        LocalDate checkInDate = LocalDate.parse(hotelDto.getCheckInDate());
-        LocalDate checkOutDate = LocalDate.parse(hotelDto.getCheckOutDate());
+    public ResponseEntity<List<Room>> findAvailableRooms( @RequestBody @Valid HotelDto hotelDto) throws ExecutionException, InterruptedException {
 
-
-        CompletableFuture<List<Room>> roomList = hotelService.findAvailableRooms(checkInDate,checkOutDate,hotelDto.getGuests());
+        CompletableFuture<List<Room>> roomList = hotelService.findAvailableRooms(hotelDto.getCheckInDate(),
+                hotelDto.getCheckOutDate(),hotelDto.getGuests());
 
         return ResponseEntity.ok(roomList.get());
     }

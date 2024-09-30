@@ -7,19 +7,20 @@ import jakarta.validation.constraints.Min;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalDate;
+
 
 @Data
 public class HotelDto extends  BaseDto {
-    @NotEmpty(message = "Check-in date is required")
+
+
     @NotNull(message = "Check-in date is required")
-    @JsonFormat(pattern = "MM/dd/yyyy")
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    private String checkInDate;
-    @NotEmpty(message = "Check-out date is required")
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    @JsonFormat(pattern = "MM/dd/yyyy")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate checkInDate;
+
     @NotNull(message = "Check-out date is required")
-    private String checkOutDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate checkOutDate;
 
     @NotNull(message = "Number of guests is required")
     @Min(value = 1, message = "At least 1 guest is required")
