@@ -41,7 +41,7 @@ This project is a "Hotel Booking System" built using Spring Boot. It includes ba
 ## Non-Functional Requirements
 
 1. **Security**
-   - Use Spring Security to protect endpoints.
+   - Use Interceptor protect endpoints.
    - Sensitive data (such as passwords) must be encrypted.
 
 2. **Performance**
@@ -57,10 +57,9 @@ This project is a "Hotel Booking System" built using Spring Boot. It includes ba
 
 ### Back-end
 - **Spring Boot:** Main framework for the application.
-- **Spring Data JPA:** Manages database interactions.
-- **Spring Security:** Manages security and user authentication.
-- **MySQL or PostgreSQL:** Main database.
-- **Hibernate:** ORM for Spring Data JPA.
+- **MyBatis:** Manages database interactions.
+- **Security:** Manages security and user authentication.
+- **MySQL :** Main database.
 - **REST API:** Provides API services for the front-end.
 
 ### Front-end
