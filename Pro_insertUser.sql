@@ -6,8 +6,9 @@ CREATE PROCEDURE InsertUsers()
 BEGIN
     DECLARE i INT DEFAULT 1;
     WHILE i <= 5000 DO
-        INSERT INTO users (email, name, password, username) 
+        INSERT INTO users (id, email, name, password, username) 
         VALUES (
+			UUID(),
             CONCAT('user', i, '@example.com'), 
             CONCAT('User ', i), 
             'password123', 
@@ -15,7 +16,9 @@ BEGIN
         );
         SET i = i + 1;
     END WHILE;
-END //
+END
+
+ //
 
 DELIMITER ;
 
