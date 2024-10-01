@@ -3,13 +3,14 @@ package com.example.hotel.entity;
 
 import java.time.LocalDateTime;
 import java.util.Set;
+import java.util.UUID;
 
 
 import lombok.Data;
 
 @Data
 public class User {
-    private long id;
+    private String id;
     private String name;
 
     private String username;

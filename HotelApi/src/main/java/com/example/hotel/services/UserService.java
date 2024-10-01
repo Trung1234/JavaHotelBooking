@@ -37,7 +37,7 @@ public class UserService {
 
     public boolean existsByEmail(SignUpDto signUpDto) {
         String email = signUpDto.getEmail();
-        return Objects.nonNull(userMapper.selectUserByEmail(email));
+        return userMapper.selectUserByEmail(email).isPresent();
     }
 
     public Optional<User> authenticateUser(LoginDto loginDto) {

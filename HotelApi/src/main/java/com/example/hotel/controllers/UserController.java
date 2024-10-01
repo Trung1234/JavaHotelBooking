@@ -57,7 +57,7 @@ public class UserController {
             if (!isMatchPass) {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
             }else {
-                String token = JwtUtil.generateToken(user.get().getUsername(),"ROLE_ADMIN");
+                String token = JwtUtil.generateToken(user.get().getId(),"ROLE_ADMIN");
                 return ResponseEntity.ok(token);
             }
         } else {
