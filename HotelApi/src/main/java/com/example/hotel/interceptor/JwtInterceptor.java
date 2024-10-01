@@ -7,6 +7,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
+import java.util.Objects;
+
 @Component
 public class JwtInterceptor implements HandlerInterceptor {
 
@@ -25,14 +27,13 @@ public class JwtInterceptor implements HandlerInterceptor {
 
         try {
             // Validate the token
-            JwtUtil.verifyToken(token);
+            // If token is valid, proceed with the request
+            return Objects.nonNull(JwtUtil.verifyToken(token));
         } catch (Exception e) {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             response.getWriter().write("Invalid token");
             return false;
         }
-
-        return true; // If token is valid, proceed with the request
     }
 }
 
