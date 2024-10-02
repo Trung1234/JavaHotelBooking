@@ -51,9 +51,9 @@ public class UserService {
 
     // Validate user input
     public void validateUserInput(SignUpDto user) throws InvalidInputException {
-        if (user.getEmail() == null || !isValidEmail(user.getEmail())) {
-            throw new InvalidInputException("Invalid email format.");
-        }
+//        if (user.getEmail() == null || !isValidEmail(user.getEmail())) {
+//            throw new InvalidInputException("Invalid email format.");
+//        }
         if (user.getPassword() == null || user.getPassword().length() < 8) {
             throw new InvalidInputException("Password must be at least 8 characters.");
         }
@@ -67,8 +67,8 @@ public class UserService {
     }
 
     // Email validation (simple regex)
-    private boolean isValidEmail(String email) {
-        return Pattern.compile("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$").matcher(email).find();
-    }
+//    private boolean isValidEmail(String email) {
+//        return Pattern.compile("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$").matcher(email).find();
+//    }
 
 }

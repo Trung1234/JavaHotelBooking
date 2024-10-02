@@ -12,7 +12,13 @@ public class PasswordEncryption {
         // Generate salt and hash the password
         return BCrypt.hashpw(plainPassword, BCrypt.gensalt());
     }
-    
+
+    /**
+     * Method to check password
+     * @param plainPassword
+     * @param hashedPassword
+     * @return
+     */
     public static boolean checkpw(String plainPassword,String hashedPassword) {
         return BCrypt.checkpw(plainPassword, hashedPassword);
     }

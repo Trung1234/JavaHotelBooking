@@ -4,6 +4,7 @@ import com.example.hotel.common.JwtUtil;
 import com.example.hotel.exeption.DataAlreadyExistsException;
 import com.example.hotel.common.StringUtils;
 import com.example.hotel.exeption.InvalidInputException;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +25,7 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/signup")
-    public ResponseEntity<?> registerUser(@RequestBody SignUpDto signUpDto){
+    public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpDto signUpDto){
         if (StringUtils.isNullorBlank(signUpDto.getEmail()) || StringUtils.isNullorBlank(signUpDto.getPassword())) {
             throw new IllegalArgumentException("Please input email and password ");
         }

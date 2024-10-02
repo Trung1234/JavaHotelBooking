@@ -28,7 +28,6 @@ public class HotelService {
     @Async
     public CompletableFuture<List<Room>> findAvailableRooms(LocalDate checkInDate, LocalDate checkOutDate,
                                                             Integer guests) {
-            // Simulate a long-running task (e.g., database query, external service call) List<Room> availableRooms = searchAvailableRooms(city, checkInDate, checkOutDate, guests); return CompletableFuture.completedFuture(availableRooms); }
         List<Room> roomList = hotelMapper.findAvailableRooms( checkInDate,  checkOutDate,
                  guests);
         return CompletableFuture.supplyAsync(() -> {
