@@ -4,6 +4,7 @@ import com.example.hotel.common.JwtUtil;
 import com.example.hotel.exeption.DataAlreadyExistsException;
 import com.example.hotel.common.StringUtils;
 import com.example.hotel.exeption.InvalidInputException;
+import com.example.hotel.response.ApiResponse;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -51,7 +52,7 @@ public class UserController {
 
 //    @CrossOrigin(origins = "http://localhost:3000")  // Allow specific origin
     @PostMapping("/login")
-    public ResponseEntity<String> authenticateUser(@RequestBody LoginDto loginDto) {
+    public ResponseEntity<ApiResponse> authenticateUser(@RequestBody LoginDto loginDto) {
         Optional<User> user = userService.authenticateUser(loginDto);
         if (user.isPresent()) {
             boolean isMatchPass = userService.matchPassword(loginDto.getPassword(),user.get().getPassword());
@@ -59,7 +60,7 @@ public class UserController {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
             }else {
                 String token = JwtUtil.generateToken(user.get().getId(),"ROLE_ADMIN");
-                return ResponseEntity.ok(token);
+                return ResponseEntity.ok(new ApiResponse<String>("Success", token));
             }
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
