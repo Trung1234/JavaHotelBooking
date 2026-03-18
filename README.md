@@ -1,5 +1,6 @@
 # Hotel Booking System
 
+
 ## Project Overview
 
 This project is a "Hotel Booking System" built using Spring Boot. It includes basic hotel management functionalities allowing users to search and book rooms, manage bookings, and manage rooms.
